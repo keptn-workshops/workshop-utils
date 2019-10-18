@@ -13,13 +13,13 @@ before_install:
 jobs:
   include:
   - stage: workshop-utils-base
-    env: IMAGE="${REPO}/workshop-utils-base"
+    env: IMAGE=keptnexamples/workshop-utils-base
     script:
     - echo $TRAVIS_BUILD_STAGE_NAME
     - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_base
     - docker push "${IMAGE}:${VERSION}"
   - stage: workshop-utils-gke
-    env: IMAGE="${REPO}/workshop-utils-gke"
+    env: IMAGE=keptnexamples/workshop-utils-gke
     script:
     - echo $TRAVIS_BUILD_STAGE_NAME
     - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_gke

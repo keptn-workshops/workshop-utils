@@ -24,3 +24,27 @@ jobs:
     - echo $TRAVIS_BUILD_STAGE_NAME
     - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_gke
     - docker push "${IMAGE}:${VERSION}"
+  - stage: workshop-utils-eks
+    env: IMAGE=keptnexamples/workshop-utils-eks
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_eks
+    - docker push "${IMAGE}:${VERSION}"
+  - stage: workshop-utils-aks
+    env: IMAGE=keptnexamples/workshop-utils-aks
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_aks
+    - docker push "${IMAGE}:${VERSION}"
+  - stage: workshop-utils-ocp
+    env: IMAGE=keptnexamples/workshop-utils-ocp
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_ocp
+    - docker push "${IMAGE}:${VERSION}"
+  - stage: workshop-utils-pks
+    env: IMAGE=keptnexamples/workshop-utils-pks
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_pks
+    - docker push "${IMAGE}:${VERSION}"

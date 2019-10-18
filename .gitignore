@@ -1,0 +1,9 @@
+.project
+.DS_Store
+
+# credentials file with personal tokens
+creds.json*
+
+# any misc logs
+*.log
+*.bak

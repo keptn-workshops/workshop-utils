@@ -1,0 +1,27 @@
+sudo: true
+dist: xenial
+language: go
+services:
+- docker
+before_install:
+- REPO=keptnexamples
+- VERSION="$(cat version | tr -d '[:space:]')"
+- echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
+- REPO_URL="$(git remote get-url --all origin)"
+- ./writeManifest.sh
+- cat MANIFEST
+- cp MANIFEST .
+jobs:
+  include:
+  - stage: workshop-utils-base
+    env: IMAGE=${REPO}/workshop-utils-base
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_base
+    - docker push "${IMAGE}:${VERSION}"
+  - stage: workshop-utils-gke
+    env: IMAGE=${REPO}/workshop-utils-gke
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_gke
+    - docker push "${IMAGE}:${VERSION}"

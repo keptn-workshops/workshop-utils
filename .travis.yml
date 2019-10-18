@@ -6,7 +6,7 @@ services:
 before_install:
 - REPO=keptnexamples
 - VERSION="$(cat version | tr -d '[:space:]')"
-- echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
+- docker login --username $REGISTRY_USER --password-stdin
 - REPO_URL="$(git remote get-url --all origin)"
 - ./writeManifest.sh
 - cat MANIFEST
@@ -22,6 +22,7 @@ jobs:
     env: IMAGE=keptnexamples/workshop-utils-gke
     script:
     - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker login --username $REGISTRY_USER --password-stdin
     - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_gke
     - docker push "${IMAGE}:${VERSION}"
   - stage: workshop-utils-eks

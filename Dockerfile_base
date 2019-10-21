@@ -54,8 +54,9 @@ RUN rm -rf ${CLI_VERSION}_keptn.tar
 RUN keptn version
 
 ######################################################################
-# copy in scripts
+# copy files
 ######################################################################
 WORKDIR /usr/keptn
 COPY ./scripts scripts
+COPY ./keptn-onboarding keptn-onboarding
 COPY MANIFEST MANIFEST

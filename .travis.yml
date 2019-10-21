@@ -5,7 +5,7 @@ services:
 - docker
 before_install:
 - REPO=keptnworkshops
-- TAG="$(echo $TRAVIS_BRANCH | sed -e 's/\//-/g'"
+- TAG="$(echo $TRAVIS_BRANCH | sed -e 's/\//-/g')"
 - echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
 - REPO_URL="$(git remote get-url --all origin)"
 - ./writeManifest.sh

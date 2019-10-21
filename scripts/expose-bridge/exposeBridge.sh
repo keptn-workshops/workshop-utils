@@ -2,11 +2,9 @@
 
 clear
 echo ""
-echo "======================================================="
-echo "About to create a VirtualService to Keptn Bridge service"
-echo ""
-echo "NOTE: This is not supported on Pivotal Container Service"
-echo "======================================================="
+echo "============================================================="
+echo "About to create a VirtualService to the Keptn Bridge service"
+echo "============================================================="
 read -rsp $'Press ctrl-c to abort. Press any key to continue...\n' -n1 key
 echo ""
 

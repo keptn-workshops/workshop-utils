@@ -1,4 +1,4 @@
-FROM keptnworkshops/workshop-utils-base:0.5.0
+FROM keptnexamples/workshop-utils-base:0.5.0
 
 ######################################################################
 # Google specific tools

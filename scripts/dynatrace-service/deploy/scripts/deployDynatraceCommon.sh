@@ -9,7 +9,8 @@ function deploy_dt {
     DT_PAAS_TOKEN=$(cat creds_dt.json | jq -r '.dynatracePaaSToken')
 
     # Deploy Dynatrace operator
-    DT_OPERATOR_LATEST_RELEASE=$(curl -s https://api.github.com/repos/dynatrace/dynatrace-oneagent-operator/releases/latest | grep tag_name | cut -d '"' -f 4)
+    #DT_OPERATOR_LATEST_RELEASE=$(curl -s https://api.github.com/repos/dynatrace/dynatrace-oneagent-operator/releases/latest | grep tag_name | cut -d '"' -f 4)
+    DT_OPERATOR_LATEST_RELEASE="v0.4.2"
     print_info "Installing Dynatrace Operator $DT_OPERATOR_LATEST_RELEASE"
 
     kubectl create namespace dynatrace

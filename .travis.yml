@@ -10,42 +10,43 @@ before_install:
 - REPO_URL="$(git remote get-url --all origin)"
 - ./writeManifest.sh
 - cat MANIFEST
+- echo Using REPO=${REPO} TAG=${TAG} REPO_URL=${REPO_URL}
 jobs:
   include:
   - stage: workshop-utils-base
-    env: IMAGE=keptnexamples/workshop-utils-base
+    env: IMAGE=workshop-utils-base
     script:
     - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${TAG}" -f Dockerfile_base
-    - docker push "${IMAGE}:${TAG}"
+    - docker build . -t "${REPO}/${IMAGE}:${TAG}" -f Dockerfile_base
+    - docker push "${REPO}/${IMAGE}:${TAG}"
   - stage: workshop-utils-gke
-    env: IMAGE=keptnexamples/workshop-utils-gke
+    env: IMAGE=workshop-utils-gke
     script:
     - echo $TRAVIS_BUILD_STAGE_NAME
     - echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
-    - docker build . -t "${IMAGE}:${TAG}" -f Dockerfile_gke
-    - docker push "${IMAGE}:${TAG}"
+    - docker build . -t "${REPO}/${IMAGE}:${TAG}" -f Dockerfile_gke
+    - docker push "${REPO}/${IMAGE}:${TAG}"
   - stage: workshop-utils-eks
-    env: IMAGE=keptnexamples/workshop-utils-eks
+    env: IMAGE=workshop-utils-eks
     script:
     - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${TAG}" -f Dockerfile_eks
-    - docker push "${IMAGE}:${TAG}"
+    - docker build . -t "${REPO}/${IMAGE}:${TAG}" -f Dockerfile_eks
+    - docker push "${REPO}/${IMAGE}:${TAG}"
   - stage: workshop-utils-aks
-    env: IMAGE=keptnexamples/workshop-utils-aks
+    env: IMAGE=workshop-utils-aks
     script:
     - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${TAG}" -f Dockerfile_aks
-    - docker push "${IMAGE}:${TAG}"
+    - docker build . -t "${REPO}/${IMAGE}:${TAG}" -f Dockerfile_aks
+    - docker push "${REPO}/${IMAGE}:${TAG}"
   - stage: workshop-utils-ocp
-    env: IMAGE=keptnexamples/workshop-utils-ocp
+    env: IMAGE=workshop-utils-ocp
     script:
     - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${TAG}" -f Dockerfile_ocp
-    - docker push "${IMAGE}:${TAG}"
+    - docker build . -t "${REPO}/${IMAGE}:${TAG}" -f Dockerfile_ocp
+    - docker push "${REPO}/${IMAGE}:${TAG}"
   - stage: workshop-utils-pks
-    env: IMAGE=keptnexamples/workshop-utils-pks
+    env: IMAGE=workshop-utils-pks
     script:
     - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${TAG}" -f Dockerfile_pks
-    - docker push "${IMAGE}:${TAG}"
+    - docker build . -t "${REPO}/${IMAGE}:${TAG}" -f Dockerfile_pks
+    - docker push "${REPO}/${IMAGE}:${TAG}"

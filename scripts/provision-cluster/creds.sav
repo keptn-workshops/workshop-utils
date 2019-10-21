@@ -1,0 +1,10 @@
+{
+    "deployment": "DEPLOYMENT_PLACEHOLDER",
+    "resourcePrefix": "RESOURCE_PREFIX_PLACEHOLDER",
+    "aksSubscriptionId": "AKS_SUBSCRIPTION_ID_PLACEHOLDER",
+    "aksLocation": "AKS_LOCATION_PLACEHOLDER",
+    "gkeProject": "GKE_PROJECT_PLACEHOLDER",
+    "gkeClusterZone": "GKE_CLUSTER_ZONE_PLACEHOLDER",
+    "eksClusterRegion": "EKS_CLUSTER_REGION_PLACEHOLDER",
+    "eksDomain": "EKS_DOMAIN_PLACEHOLDER"
+}

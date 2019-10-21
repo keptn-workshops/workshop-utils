@@ -1,0 +1,7 @@
+{
+    "deployment": "DEPLOYMENT_PLACEHOLDER",
+    "dynatraceServiceBranch": "release-0.3.1",
+    "dynatraceHostName": "DYNATRACE_HOSTNAME_PLACEHOLDER",
+    "dynatraceApiToken": "DYNATRACE_API_TOKEN_PLACEHOLDER",
+    "dynatracePaaSToken": "DYNATRACE_PAAS_TOKEN_PLACEHOLDER"
+}

@@ -5,25 +5,46 @@ services:
 - docker
 before_install:
 - REPO=keptnworkshops
-- VERSION="$(cat version | tr -d '[:space:]')"
 - echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
 - REPO_URL="$(git remote get-url --all origin)"
 - ./writeManifest.sh
 - cat MANIFEST
 jobs:
   include:
-  - stage: build-and-push-all
-    if: NOT type = pull_request
+  - stage: workshop-utils-base
+    env: IMAGE=keptnexamples/workshop-utils-base
     script:
-    - docker build . -t "${REPO}/workshop-utils-base:${VERSION}" -f Dockerfile_base
-    - docker build . -t "${REPO}/workshop-utils-gke:${VERSION}" -f Dockerfile_base
-    - docker build . -t "${REPO}/workshop-utils-eks:${VERSION}" -f Dockerfile_base
-    - docker build . -t "${REPO}/workshop-utils-aks:${VERSION}" -f Dockerfile_base
-    - docker build . -t "${REPO}/workshop-utils-ocp:${VERSION}" -f Dockerfile_base
-    - docker build . -t "${REPO}/workshop-utils-pks:${VERSION}" -f Dockerfile_base
-    - docker push "${REPO}/workshop-utils-base:${VERSION}"
-    - docker push "${REPO}/workshop-utils-gke:${VERSION}"
-    - docker push "${REPO}/workshop-utils-eks:${VERSION}"
-    - docker push "${REPO}/workshop-utils-aks:${VERSION}"
-    - docker push "${REPO}/workshop-utils-ocp:${VERSION}"
-    - docker push "${REPO}/workshop-utils-pks:${VERSION}"
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${TRAVIS_BRANCH}" -f Dockerfile_base
+    - docker push "${IMAGE}:${TRAVIS_BRANCH}"
+  - stage: workshop-utils-gke
+    env: IMAGE=keptnexamples/workshop-utils-gke
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
+    - docker build . -t "${IMAGE}:${TRAVIS_BRANCH}" -f Dockerfile_gke
+    - docker push "${IMAGE}:${TRAVIS_BRANCH}"
+  - stage: workshop-utils-eks
+    env: IMAGE=keptnexamples/workshop-utils-eks
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${TRAVIS_BRANCH}" -f Dockerfile_eks
+    - docker push "${IMAGE}:${TRAVIS_BRANCH}"
+  - stage: workshop-utils-aks
+    env: IMAGE=keptnexamples/workshop-utils-aks
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${TRAVIS_BRANCH}" -f Dockerfile_aks
+    - docker push "${IMAGE}:${TRAVIS_BRANCH}"
+  - stage: workshop-utils-ocp
+    env: IMAGE=keptnexamples/workshop-utils-ocp
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${TRAVIS_BRANCH}" -f Dockerfile_ocp
+    - docker push "${IMAGE}:${TRAVIS_BRANCH}"
+  - stage: workshop-utils-pks
+    env: IMAGE=keptnexamples/workshop-utils-pks
+    script:
+    - echo $TRAVIS_BUILD_STAGE_NAME
+    - docker build . -t "${IMAGE}:${TRAVIS_BRANCH}" -f Dockerfile_pks
+    - docker push "${IMAGE}:${TRAVIS_BRANCH}"

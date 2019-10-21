@@ -62,12 +62,12 @@ To test this image and scripts with no cluster setup, follow these steps.
 1. Provision Cluster.  Adjust command for your target. 
 
     ```
-    cd provision-cluster
+    cd /usr/keptn/scripts/provision-cluster
     ./enterProvisionClusterInputs.sh
     ./provisionCluster.sh
     ```
 
-1. Install Keptn.  Adjust command for your target.
+1. Install Keptn. Adjust command for your target.
 
     ```
     keptn install --platform=gke
@@ -76,14 +76,14 @@ To test this image and scripts with no cluster setup, follow these steps.
 1. Install Dynatrace OneAgent Operator
 
     ```
-    cd install-dynatrace-operator
-    ./enterDynatraceInputs.sh
-    ./installDynatrace.sh
+    cd /usr/keptn/scripts/dynatrace-service/deploy/scripts
+    ./defineDynatraceCredentials.sh
+    ./deployDynatraceOn<PLATFORM>.sh
     ```
 
 1. Expose Bridge
 
     ```
-    cd expose-bridge
+    cd /usr/keptn/scripts/expose-bridge
     ./exposeBridge.sh
     ```

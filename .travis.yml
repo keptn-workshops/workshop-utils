@@ -4,7 +4,7 @@ language: go
 services:
 - docker
 before_install:
-- REPO=keptnexamples
+- REPO=keptnworkshops
 - VERSION="$(cat version | tr -d '[:space:]')"
 - echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
 - REPO_URL="$(git remote get-url --all origin)"
@@ -12,40 +12,18 @@ before_install:
 - cat MANIFEST
 jobs:
   include:
-  - stage: workshop-utils-base
-    env: IMAGE=keptnexamples/workshop-utils-base
+  - stage: build-and-push-all
+    if: NOT type = pull_request
     script:
-    - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_base
-    - docker push "${IMAGE}:${VERSION}"
-  - stage: workshop-utils-gke
-    env: IMAGE=keptnexamples/workshop-utils-gke
-    script:
-    - echo $TRAVIS_BUILD_STAGE_NAME
-    - echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
-    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_gke
-    - docker push "${IMAGE}:${VERSION}"
-  - stage: workshop-utils-eks
-    env: IMAGE=keptnexamples/workshop-utils-eks
-    script:
-    - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_eks
-    - docker push "${IMAGE}:${VERSION}"
-  - stage: workshop-utils-aks
-    env: IMAGE=keptnexamples/workshop-utils-aks
-    script:
-    - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_aks
-    - docker push "${IMAGE}:${VERSION}"
-  - stage: workshop-utils-ocp
-    env: IMAGE=keptnexamples/workshop-utils-ocp
-    script:
-    - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_ocp
-    - docker push "${IMAGE}:${VERSION}"
-  - stage: workshop-utils-pks
-    env: IMAGE=keptnexamples/workshop-utils-pks
-    script:
-    - echo $TRAVIS_BUILD_STAGE_NAME
-    - docker build . -t "${IMAGE}:${VERSION}" -f Dockerfile_pks
-    - docker push "${IMAGE}:${VERSION}"
+    - docker build . -t "${REPO}/workshop-utils-base:${VERSION}" -f Dockerfile_base
+    - docker build . -t "${REPO}/workshop-utils-gke:${VERSION}" -f Dockerfile_base
+    - docker build . -t "${REPO}/workshop-utils-eks:${VERSION}" -f Dockerfile_base
+    - docker build . -t "${REPO}/workshop-utils-aks:${VERSION}" -f Dockerfile_base
+    - docker build . -t "${REPO}/workshop-utils-ocp:${VERSION}" -f Dockerfile_base
+    - docker build . -t "${REPO}/workshop-utils-pks:${VERSION}" -f Dockerfile_base
+    - docker push "${REPO}/workshop-utils-base:${VERSION}"
+    - docker push "${REPO}/workshop-utils-gke:${VERSION}"
+    - docker push "${REPO}/workshop-utils-eks:${VERSION}"
+    - docker push "${REPO}/workshop-utils-aks:${VERSION}"
+    - docker push "${REPO}/workshop-utils-ocp:${VERSION}"
+    - docker push "${REPO}/workshop-utils-pks:${VERSION}"

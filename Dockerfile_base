@@ -15,6 +15,7 @@ RUN apt-get update -qq && \
     jq \
     wget \
     vim \
+    nano \
   && rm -rf /var/lib/apt/lists/*
 
 ARG YQ_VERSION=2.3.0
@@ -54,8 +55,10 @@ RUN rm -rf ${CLI_VERSION}_keptn.tar
 RUN keptn version
 
 ######################################################################
-# copy in scripts
+# copy files
 ######################################################################
 WORKDIR /usr/keptn
 COPY ./scripts scripts
+COPY ./keptn-onboarding keptn-onboarding
+COPY ./load-generation load-generation
 COPY MANIFEST MANIFEST

@@ -13,7 +13,7 @@ Goto pipeline ```more options``` for adding these as ```environment variables```
 
 ## Image versions
 
-* The root folder has a ```version``` file witnh a value in the format of  ```Major.Minor.Patch``` that Travis-CI 
+* The root folder has a ```version``` file with a value in the format of  ```Major.Minor.Patch``` that Travis-CI 
 ```.travis.yml``` file uses to build the tag.  The image tag is intended to map to the Keptn release such as 0.5.0
 
 ## Local development
@@ -33,19 +33,19 @@ Dockerfile_pks   <-- Pivotal
 
 To build image, follow these steps:
 
-1. Update the ```version``` file as required to match the keptn version.  This value used in Travis image tagging.
+1. Update the `version` file as required to match the keptn version.  This value used in Travis image tagging.
 
 1. Make changes and lint the Dockerfile using this [linting tool](https://www.fromlatest.io/#/)
 
 1. Build base image, in this example tag with 0.5.0
 
-    ```
+    ```console
     docker build -t keptnworkshops/workshop-utils-base:0.5.0 -f Dockerfile_base .
     ```
 
 1. Build google image
 
-    ```
+    ```console
     docker build -t keptnworkshops/workshop-utils-gke:0.5.0 -f Dockerfile_gke .
     ```
 
@@ -53,15 +53,15 @@ To build image, follow these steps:
 
 To test this image and scripts with no cluster setup, follow these steps.
 
-1. Run and shell into container, in this example tag with 0.5.0 for Google
+1. Run and shell into container, in this example tag with 0.5.0 for GKE
 
-    ```
+    ```console
     docker run -it keptnworkshops/workshop-utils-gke:0.5.0 /bin/bash
     ```
 
 1. Provision Cluster.  Adjust command for your target. 
 
-    ```
+    ```console
     cd /usr/keptn/scripts/provision-cluster
     ./enterProvisionClusterInputs.sh
     ./provisionCluster.sh
@@ -69,13 +69,13 @@ To test this image and scripts with no cluster setup, follow these steps.
 
 1. Install Keptn. Adjust command for your target.
 
-    ```
+    ```console
     keptn install --platform=gke
     ```
 
 1. Install Dynatrace OneAgent Operator
 
-    ```
+    ```console
     cd /usr/keptn/scripts/dynatrace-service/deploy/scripts
     ./defineDynatraceCredentials.sh
     ./deployDynatraceOn<PLATFORM>.sh
@@ -83,7 +83,7 @@ To test this image and scripts with no cluster setup, follow these steps.
 
 1. Expose Bridge
 
-    ```
+    ```console
     cd /usr/keptn/scripts/expose-bridge
     ./exposeBridge.sh
     ```

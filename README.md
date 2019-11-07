@@ -14,7 +14,7 @@ Goto pipeline ```more options``` for adding these as ```environment variables```
 ## Image versions
 
 * The root folder has a ```version``` file with a value in the format of  ```Major.Minor.Patch``` that Travis-CI 
-```.travis.yml``` file uses to build the tag.  The image tag is intended to map to the Keptn release such as 0.5.0
+```.travis.yml``` file uses to build the tag.  The image tag is intended to map to the Keptn release such as 0.5.1
 
 ## Local development
 
@@ -37,26 +37,26 @@ To build image, follow these steps:
 
 1. Make changes and lint the Dockerfile using this [linting tool](https://www.fromlatest.io/#/)
 
-1. Build base image, in this example tag with 0.5.0
+1. Build base image, in this example tag with 0.5.1
 
     ```console
-    docker build -t keptnworkshops/workshop-utils-base:0.5.0 -f Dockerfile_base .
+    docker build -t keptnworkshops/workshop-utils-base:0.5.1 -f Dockerfile_base .
     ```
 
 1. Build google image
 
     ```console
-    docker build -t keptnworkshops/workshop-utils-gke:0.5.0 -f Dockerfile_gke .
+    docker build -t keptnworkshops/workshop-utils-gke:0.5.1 -f Dockerfile_gke .
     ```
 
 ## Testing
 
 To test this image and scripts with no cluster setup, follow these steps.
 
-1. Run and shell into container, in this example tag with 0.5.0 for GKE
+1. Run and shell into container, in this example tag with 0.5.1 for GKE
 
     ```console
-    docker run -it keptnworkshops/workshop-utils-gke:0.5.0 /bin/bash
+    docker run -it keptnworkshops/workshop-utils-gke:0.5.1 /bin/bash
     ```
 
 1. Provision Cluster.  Adjust command for your target. 

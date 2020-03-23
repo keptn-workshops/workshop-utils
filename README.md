@@ -1,3 +1,6 @@
+# 🚨 PLEASE NOTE this repository has been archived and is not maintained anymore. You find the latest install installations on our official website https://keptn.sh 
+
+
 # Overview
 
 This repo contains the source code and instructions for building and publishing a Docker image that can be used in trying or workshops for [Keptn](https://keptn.sh). This image contains utilities like the Keptn CLI and cloud provider CLI tools in
